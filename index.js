@@ -10,6 +10,8 @@ const app = express();
 
 const connectDB = require('./config/db')
 
+const auth = require('./routes/authRoute');
+
 // db connection
 connectDB();
 
@@ -22,6 +24,11 @@ app.use(cookieParser());
 
 // Enable CORS
 app.use(cors());
+
+
+// register all routes
+app.use('/api/v1/auth' , auth);
+
 
 app.listen(PORT, () => {
     console.log(`Server running on PORT: ${PORT}`)
