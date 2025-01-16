@@ -30,7 +30,7 @@ app.use(cors());
 
 // register all routes
 app.use('/api/v1/auth' , auth);
-app.use('/api/v1/product', product);
+app.use('/api/v1/products', product);
 
 // use the error handling middleware
 app.use(errorHandler);

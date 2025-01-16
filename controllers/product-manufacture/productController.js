@@ -23,4 +23,28 @@ const addProduct = asyncHandler(async (req, res, next) => {
   
   });
 
-module.exports = { addProduct };
+
+// @desc     Get All Products
+// @route    GET /api/v1/products
+// @access   Public
+
+const getAllProducts = asyncHandler(async(req, res, next) => {
+    res.status(200).json(res.advancedResults);
+})
+
+// @desc     Get Single Products
+// @route    GET /api/v1/products/:id
+// @access   Public
+
+const getProduct = asyncHandler(async(req, res, next) => {
+    const { id } = req.params;
+    const product = await Product.findById(id);
+
+    if(!product) {
+        return next(new ErrorResponse("Product Not Found", 404))
+    }
+    
+    res.status(200).json({success: true, data: product});
+})
+
+module.exports = { addProduct, getAllProducts, getProduct };
