@@ -12,6 +12,7 @@ const connectDB = require('./config/db')
 const errorHandler = require("./middleware/error")
 
 const auth = require('./routes/authRoute');
+const product = require('./routes/product-manufacture/productRoutes');
 
 // db connection
 connectDB();
@@ -29,6 +30,7 @@ app.use(cors());
 
 // register all routes
 app.use('/api/v1/auth' , auth);
+app.use('/api/v1/product', product);
 
 // use the error handling middleware
 app.use(errorHandler);
