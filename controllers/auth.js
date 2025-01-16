@@ -9,10 +9,6 @@ const ErrorResponse = require('../utils/errorResponse');
 
 const registerUsers = asyncHandler(async (req, res, next) => {
     const { firstName, lastName, nic, contactNumber, email, role, password, confiremPassword } = req.body;
-
-    if(password !== confiremPassword) {
-      return next(new ErrorResponse("Password did not match", 400))
-    }
   
     const user = await Users.create({
       firstName,
