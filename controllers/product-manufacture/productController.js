@@ -61,7 +61,7 @@ const updateProduct = asyncHandler(async(req, res, next) => {
     }
 
     if(product.owner.toString() !== req.user._id.toString()) {
-        return next(new ErrorResponse(`User ${req.user._id} in not authorized to update this Product`,403))
+        return next(new ErrorResponse(`You have no permission to update this product`,403))
     }
 
     product.image = image || product.image;
@@ -88,7 +88,7 @@ const deleteProduct = asyncHandler(async(req, res, next) => {
     }
 
     if(product.owner.toString() !== req.user._id.toString()) {
-        return next(new ErrorResponse(`User ${req.user._id} in not authorized to delete this Product`,403))
+        return next(new ErrorResponse(`You have no permission to delete this product`,403))
     }
 
     await product.deleteOne();
