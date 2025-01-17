@@ -21,6 +21,10 @@ const FoodSchema = mongoose.Schema({
     type: String,
     required: [true, 'Please add a includes'],
   },
+  createdAt: {
+    type: Date,
+    default: Date.now,
+  },
   shop: {
     type: mongoose.Schema.ObjectId,
     ref: 'Shop',

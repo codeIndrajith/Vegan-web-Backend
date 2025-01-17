@@ -38,8 +38,10 @@ const UserSchema = mongoose.Schema({
     minlength: 6,
     select: false,
   },
-}, {
-    timestamps: true
+  createdAt: {
+    type: Date,
+    default: Date.now,
+  },
 });
 
 // Encrypt password using bcrypt
