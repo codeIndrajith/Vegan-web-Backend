@@ -21,13 +21,16 @@ const FoodSchema = mongoose.Schema({
     type: String,
     required: [true, 'Please add a includes'],
   },
+  shop: {
+    type: mongoose.Schema.ObjectId,
+    ref: 'Shop',
+    required: true,
+  },
   owner: {
     type: mongoose.Schema.ObjectId,
     ref: 'Users',
     required: true,
   },
-}, {
-    timestamps: true
 });
 
 

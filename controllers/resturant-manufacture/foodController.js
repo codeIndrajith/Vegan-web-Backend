@@ -1,6 +1,7 @@
 const asyncHandler = require('../../middleware/async')
 const ErrorResponse = require('../../utils/errorResponse');
-const Food = require('../../models/Food')
+const Food = require('../../models/Food');
+const Shop = require('../../models/Shop');
 
 
 // @desc     Add Food in Resturant Manufacture
@@ -8,7 +9,12 @@ const Food = require('../../models/Food')
 // @access   Private
 
 const addFood = asyncHandler(async (req, res, next) => {
-    const { image, productName, productPrice, description, productIncludes } = req.body;
+    const { image, productName, productPrice, description, productIncludes, shop } = req.body;
+
+    const isShop = await Shop.findById(shop);
+    if(!isShop) {
+        return next(new ErrorResponse("Shop is not available for add foods", 404))
+    }
   
     const food = await Food.create({
       image,
@@ -16,6 +22,7 @@ const addFood = asyncHandler(async (req, res, next) => {
       productPrice,
       description,
       productIncludes,
+      shop,
       owner: req.user._id
     });
 

@@ -8,7 +8,7 @@ const Shop = require('../../models/Shop');
 
 router.route('/')
     .post(protect, authorize("resturantManufacture"), addShop)
-    .get(advancedResults(Shop), getAllShops);
+    .get(advancedResults(Shop, "foods"), getAllShops);
 router.route('/:id').get(getShop).put(protect, authorize("resturantManufacture"), updateShop).delete(protect, authorize("resturantManufacture"), deleteShop);
 
 module.exports = router;

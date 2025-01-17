@@ -30,8 +30,24 @@ const ShopSchema = mongoose.Schema({
     ref: 'Users',
     required: true,
   },
-}, {
-    timestamps: true
+},
+{
+  toJSON: { virtuals: true, versionKey: false, transform: removeIdField },
+  toObject: { virtuals: true, versionKey: false, transform: removeIdField },
+});
+
+// Helper function to remove `id` field
+function removeIdField(doc, ret) {
+  delete ret.id; // Remove `id`
+  return ret;
+}
+
+// Reverse populate with virtuals
+ShopSchema.virtual('foods', {
+  ref: 'Food',
+  localField: '_id',
+  foreignField: 'shop',
+  justOne: false,
 });
 
 
