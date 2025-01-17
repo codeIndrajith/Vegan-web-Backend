@@ -14,6 +14,7 @@ const errorHandler = require("./middleware/error")
 const auth = require('./routes/authRoute');
 const product = require('./routes/product-manufacture/productRoutes');
 const shop = require('./routes/resturant-manufacture/shopRoutes');
+const food = require('./routes/resturant-manufacture/foodRoutes');
 
 // db connection
 connectDB();
@@ -33,6 +34,7 @@ app.use(cors());
 app.use('/api/v1/auth' , auth);
 app.use('/api/v1/products', product);
 app.use('/api/v1/shops', shop);
+app.use('/api/v1/foods', food);
 
 // use the error handling middleware
 app.use(errorHandler);
