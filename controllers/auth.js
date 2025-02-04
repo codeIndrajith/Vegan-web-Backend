@@ -95,7 +95,11 @@ const sendTokenResponse = (user, statusCode, res) => {
   
     res.status(statusCode).cookie('token', token, option).json({
       success: true,
-      token,
+      user: {
+        userName: user.firstName + " " + user.lastName,
+        userEmail: user.email,
+        userRole: user.role
+      }
     });
   };
 
