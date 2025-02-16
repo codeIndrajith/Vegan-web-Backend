@@ -1,4 +1,4 @@
-const { model } = require('mongoose');
+const { model } = require("mongoose");
 
 const advancedResults = (model, populate) => async (req, res, next) => {
   let query;
@@ -7,7 +7,7 @@ const advancedResults = (model, populate) => async (req, res, next) => {
   const reqQuery = { ...req.query };
 
   // Fields to exclude
-  const removeFields = ['select', 'sort', 'page', 'limit'];
+  const removeFields = ["select", "sort", "page", "limit"];
 
   // Loop over removeFields and delete them from reqQuery
   removeFields.forEach((param) => delete reqQuery[param]);
@@ -26,16 +26,16 @@ const advancedResults = (model, populate) => async (req, res, next) => {
 
   // Select fields
   if (req.query.select) {
-    const fields = req.query.select.split(',').join(' ');
+    const fields = req.query.select.split(",").join(" ");
     query = query.select(fields);
   }
 
   // Sort
   if (req.query.sort) {
-    const sortBy = req.query.sort.split(',').join(' ');
+    const sortBy = req.query.sort.split(",").join(" ");
     query = query.sort(sortBy);
   } else {
-    query = query.sort('-createdAt');
+    query = query.sort("-createdAt");
   }
 
   // Pagination
@@ -65,7 +65,13 @@ const advancedResults = (model, populate) => async (req, res, next) => {
   query = query.skip(startIndex).limit(limit);
 
   if (populate) {
-    query = query.populate(populate);
+    if (Array.isArray(populate)) {
+      populate.forEach((pop) => {
+        query = query.populate(pop);
+      });
+    } else {
+      query = query.populate(populate);
+    }
   }
 
   const results = await query;

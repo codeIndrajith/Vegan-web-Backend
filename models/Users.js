@@ -1,40 +1,46 @@
-const mongoose = require('mongoose');
-const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
+const mongoose = require("mongoose");
+const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
 
 const UserSchema = mongoose.Schema({
   firstName: {
     type: String,
-    required: [true, 'Please add a first name'],
+    required: [true, "Please add a first name"],
   },
   lastName: {
     type: String,
-    required: [true, 'Please add a last name'],
+    required: [true, "Please add a last name"],
   },
   nic: {
     type: String,
-    required: [true, 'Please add a NIC number'],
+    required: [true, "Please add a NIC number"],
   },
   contactNumber: {
     type: String,
-    required: [true, 'Please add a contact number'],
+    required: [true, "Please add a contact number"],
   },
   email: {
     type: String,
-    required: [true, 'Please add an email'],
+    required: [true, "Please add an email"],
     unique: true,
     match: [
       /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
-      'Please add a valid email',
+      "Please add a valid email",
     ],
   },
   role: {
     type: String,
-    enum: ['user', 'productManufacture', 'resturantManufacture', 'farmer'],
+    enum: [
+      "user",
+      "productManufacture",
+      "resturantManufacture",
+      "farmer",
+      "driver",
+    ],
   },
   password: {
     type: String,
-    required: [true, 'Please add a password'],
+    required: [true, "Please add a password"],
     minlength: 6,
     select: false,
   },
@@ -45,8 +51,8 @@ const UserSchema = mongoose.Schema({
 });
 
 // Encrypt password using bcrypt
-UserSchema.pre('save', async function (next) {
-  if (!this.isModified('password')) {
+UserSchema.pre("save", async function (next) {
+  if (!this.isModified("password")) {
     next();
   }
 
@@ -66,5 +72,5 @@ UserSchema.methods.matchPassword = function (enteredPassword) {
   return bcrypt.compare(enteredPassword, this.password);
 };
 
-const Users = mongoose.model('Users', UserSchema);
+const Users = mongoose.model("Users", UserSchema);
 module.exports = Users;
