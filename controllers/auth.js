@@ -107,6 +107,7 @@ const sendTokenResponse = (user, statusCode, res) => {
         userEmail: user.email,
         userRole: user.role,
       },
+      token: token,
     });
 };
 
