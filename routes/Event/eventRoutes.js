@@ -11,7 +11,7 @@ const Event = require("../../models/Event");
 
 router
   .route("/")
-  .post(protect, authorize("eventUser"), addEvent)
+  .post(protect, authorize("user"), addEvent)
   .get(advancedResults(Event), getAllEvent);
 
 module.exports = router;
