@@ -17,6 +17,7 @@ const shop = require("./routes/resturant-manufacture/shopRoutes");
 const food = require("./routes/resturant-manufacture/foodRoutes");
 const farmerProduct = require("./routes/farmer/productRoutes");
 const user = require("./routes/users/userRoutes");
+const events = require("./routes/Event/eventRoutes");
 
 // db connection
 connectDB();
@@ -43,6 +44,7 @@ app.use("/api/resturant-manufacture/shops", shop);
 app.use("/api/resturant-manufacture/foods", food);
 app.use("/api/farmer/products", farmerProduct);
 app.use("/api/users/buyProducts", user);
+app.use("/api/events", events);
 
 // use the error handling middleware
 app.use(errorHandler);

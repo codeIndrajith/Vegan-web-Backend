@@ -36,6 +36,7 @@ const UserSchema = mongoose.Schema({
       "resturantManufacture",
       "farmer",
       "driver",
+      "eventUser",
     ],
   },
   password: {
